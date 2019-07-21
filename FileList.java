@@ -7,8 +7,8 @@ public class FileList {
 	private String folderPath;
 	private File folder;
 	
-	public FileList() {
-		folderPath = "/Users/andrew/Desktop/MIMIC_DATABASE";
+	public FileList(String path) {
+		folderPath = path;
 		folder = new File(folderPath);
 	    files = folder.listFiles(new FilenameFilter() {
 	        public boolean accept(File dir, String name) {
@@ -28,7 +28,7 @@ public class FileList {
 	
 	//Tester
 	public static void testClass() {
-		FileList fileList = new FileList();
+		FileList fileList = new FileList("/Users/andrew/Desktop/MIMIC_DATABASE");
 		
 		int i = 0;
 		
