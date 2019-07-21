@@ -19,15 +19,21 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import com.monitorjbl.xlsx.StreamingReader;
 
 public class ExcelCombiner {
-	private FileList fileList = new FileList();
+	private FileList fileList;
 	private SXSSFWorkbook workbook = new SXSSFWorkbook();
 	
-	public void createWorkbook() throws IOException, InvalidFormatException {
-		FileOutputStream out = new FileOutputStream(new File("MIMIC_DATABASE.xlsx"));
-		createSheets();
-		workbook.write(out);
-		out.close();
-		workbook.close();
+	public ExcelCombiner(FileList fileList) {
+		this.fileList = fileList;
+	}
+	
+	public void createWorkbook(String fileName) throws IOException, InvalidFormatException {
+		if (!new File(fileName).exists()) {
+			FileOutputStream out = new FileOutputStream(new File(fileName));
+			createSheets();
+			workbook.write(out);
+			out.close();
+			workbook.close();
+		}
 	}
 	
 	public void createSheets() throws InvalidFormatException, IOException {
@@ -40,12 +46,6 @@ public class ExcelCombiner {
 			System.out.println(file.getName());
 			
 			String sheetName = file.getName().replace(".xlsx", "");
-			//New Sheet in Workbook that we're copying info into
-			//SXSSFSheet newSheet = workbook.createSheet(sheetName);
-			//Old Sheet, fileBook should just be an excel file with one sheet
-			//Sheet oldSheet = fileBook.getSheetAt(0);
-			
-			//newSheet.setRandomAccessWindowSize(100);
 			
 			for (Sheet oldSheet : fileBook) {
 				SXSSFSheet newSheet = workbook.createSheet(sheetName);
@@ -56,10 +56,6 @@ public class ExcelCombiner {
 					for (int j = 0; j < oldRow.getLastCellNum(); j++) {
 						Cell cell = oldRow.getCell(j, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK);
 						Cell newCell = newRow.createCell(j);
-						/*
-						DataFormatter dataFormatter = new DataFormatter();
-						String cellValue = dataFormatter.formatCellValue(cell);
-						*/
 						String cellValue = cell.getStringCellValue();
 						newCell.setCellValue(cellValue);
 					}
@@ -70,8 +66,10 @@ public class ExcelCombiner {
 		//workbook.close();
 	}
 	
+	/*
 	public static void main(String[] args) throws IOException, InvalidFormatException {
 		ExcelCombiner excelCombiner = new ExcelCombiner();
-		excelCombiner.createWorkbook();
+		excelCombiner.createWorkbook("MIMIC_DATABASE.xlsx");
 	}
+	*/
 }
