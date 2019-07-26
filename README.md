@@ -11,7 +11,7 @@ The Excel Combiner is a simple tool used to combine multiple single-sheet excel 
 ![alt text](https://i.imgur.com/VBylq1g.png)
 
 2. Run the Program - navigate to your folder with the excel files and then click combine. Type in your file name (without .xlsx extension)
-![alt text](https://imgur.com/6DuuEFS)
+![alt text](https://imgur.com/6DuuEFS.png)
 
 3. Final Result Shown Below as a Single Excel File with Multiple Sheets
 ![alt_text](https://i.imgur.com/v2ztfeS.png)
