@@ -1,3 +1,5 @@
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
 
@@ -16,11 +18,39 @@ public class FileSelector extends JFrame {
 	
 	public FileSelector() throws InvalidFormatException, IOException {
 		frame = new JFrame();
-		frame.setSize(300, 500);
+		//frame.setSize(300, 500);
 		frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
 		fileSelect = new JFileChooser()	;
 		fileSelect.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+		/*
+		fileSelect.addMouseListener(new MouseListener() {
+			public void mouseClicked(MouseEvent click) {
+				
+			}
+
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
+		*/
 		
 		FileNameExtensionFilter filter = new FileNameExtensionFilter("Excel Files", "xlsx", "xls");
 		fileSelect.setFileFilter(filter);
@@ -36,6 +66,12 @@ public class FileSelector extends JFrame {
 			fileName += ".xlsx";
 			
 			excelCombiner.createWorkbook(fileName);
+		}
+		
+		if (returnVal == JFileChooser.CANCEL_OPTION) {
+			frame.setVisible(false);
+			frame.dispose();
+			System.exit(0);
 		}
 		
 		frame.setVisible(true);
