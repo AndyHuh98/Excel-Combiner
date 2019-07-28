@@ -14,4 +14,4 @@ The Excel Combiner is a simple tool used to combine multiple single-sheet excel 
 ![alt text](https://imgur.com/6DuuEFS.png)
 
 3. Final Result Shown Below as a Single Excel File with Multiple Sheets
-![alt_text](https://i.imgur.com/v2ztfeS.png)
+![alt_text](https://i.imgur.com/rx9RP8f.png)
